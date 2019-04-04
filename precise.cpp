@@ -14,3 +14,23 @@ int Precise::GetSize() const
 {
     return size;
 }
+
+Precise Precise::operator+(Precise& other) const
+{
+    return Precise(this->size + other.GetSize());
+}
+
+Precise Precise::operator-(Precise& other) const
+{
+    return Precise(this->size - other.GetSize());
+}
+
+Precise Precise::operator*(Precise& other) const
+{
+    return Precise(this->size * other.GetSize());
+}
+
+Precise Precise::operator/(Precise& other) const
+{
+    return Precise(this->size / other.GetSize());
+}
