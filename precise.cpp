@@ -1,7 +1,7 @@
 #include "header.h"
+#include <bitset>
 
 Precise::Precise()
-    : size(8)
 {
 }
 

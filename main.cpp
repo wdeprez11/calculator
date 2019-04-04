@@ -4,7 +4,7 @@
 int main()
 {
     Precise p1(2);
-    Precise p2(2);
+    Precise p2(3);
 
-    std::cout << p1.GetSize() << std::endl;
+    std::cout << (p1 + p2).GetSize() << std::endl;
 }
