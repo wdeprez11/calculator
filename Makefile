@@ -1,6 +1,6 @@
 
 output: main.o precise.o
-	g++ main.o precise.o -o output
+	g++ main.o precise.o -o calculator
 
 main.o: main.cpp
 	g++ -c main.cpp
