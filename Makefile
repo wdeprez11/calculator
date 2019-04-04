@@ -9,4 +9,4 @@ message.o: precise.cpp header.h
 	g++ -c precise.cpp
 
 clean:
-	rm *.o output
+	rm *.o calculator
