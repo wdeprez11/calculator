@@ -9,8 +9,8 @@ private:
 
 public:
     Message();
-    Message(std::string& msg);
-    Message(Message& msg);
+    Message(const std::string& msg);
+    Message(const Message& msg);
     std::string GetMessage() const;
     void SetMessage(std::string& msg);
     void SetMessage(Message& msg);
@@ -20,6 +20,7 @@ class Log {
 private:
     std::vector<Message> msgLog;
     std::string prevMsg;
+    std::string startTime;
 
 public:
     Log();
@@ -27,11 +28,14 @@ public:
     ~Log();
     std::string GetPrevMsg() const;
     std::string GetLog() const;
+    std::string GetStartTime() const;
+    void FlushLog();
     void DeletePrevMsg();
     void SetLog(Log& newLog);
     void AddMsg(std::string& msg);
     void AddMsg(Message& msg);
     void ClearLog();
+    std::ofstream& operator<<(std::ofstream& stream, const Message& other);
 };
 
 #endif // LOG_H
