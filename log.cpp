@@ -2,96 +2,105 @@
 #include <ctime>
 #include <fstream>
 
-Message::Message()
-    : message("")
+Message::Message(int type, std::string msg)
+    : msgType(type)
+    , message(msg)
 {
 }
 
-Message::Message(const std::string& newMessage)
-    : message(newMessage)
+std::string Message::get_error_type()
 {
+    switch (msgType) {
+    case 1:
+        return "error: non-fatal";
+        break;
+    case 2:
+        return "error: fatal";
+        break;
+    default:
+        return "non-error";
+        break;
+    }
 }
 
-Message::Message(const Message& newMessage)
-    : message(newMessage.message)
+std::string Message::get_message()
 {
+    return message;
+}
+
+std::ofstream& Message::operator<<(std::ofstream stream, const Message& other)
+{
+    stream << other.message << '\n';
+    return stream;
 }
 
 Log::Log()
-    : msgLog()
-    , startTime(ctime(time(0)))
+    : reserved(100)
+    , logFile("log.txt")
 {
-    time_t now = time(0);
-    char* dt = ctime(&now);
-    startTime = std::string(dt);
-    msgLog.reserve(100);
-    msgLog.emplace_back(Message("Initializing Log"));
-    msgLog.emplace_back(Message("Log Started at: " + startTime /*time*/));
-    msgLog.emplace_back(Message("Waiting for user..."));
+    set_start_time();
+    //logFile.open(("log" + startTime).c_str());
+    emplace_back(Message(0, "Initializing Log..."));
+    emplace_back(Message(0, ("Log started at: " + startTime).c_str()));
+    emplace_back(Message(0, "Waiting for user input..."));
 }
 
 Log::Log(const Log& oldLog)
-    : msgLog(oldLog.msgLog)
-    , prevMsg(oldLog.prevMsg)
-    , startTime(oldLog.startTime)
+    : startTime(oldLog.startTime)
 {
 }
 
 Log::~Log()
 {
+    logFile.close();
     // add line denoting end of log
     // flush log to file
 }
 
-void Log::FlushLog()
-{
-    std::ofstream logFile;
-    logFile.open("log" + startTime);
-    for (long unsigned int i = 0; i < msgLog.size(); ++i) {
-        logFile << msgLog[i];
-    }
-    // want to call this automatically each time vector reaches capacity (every 100 lines)
-    // write msgLog vector to file
-    // clear msgLog
-    ClearLog();
-}
-
-std::string Log::GetPrevMsg() const
-{
-    return prevMsg;
-}
-
-std::string Log::GetLog() const
+std::string Log::get_log()
 {
     return "";
 }
 
-std::string Log::GetStartTime() const
+std::string Log::get_start_time()
 {
     return startTime;
 }
 
-void Log::DeletePrevMsg()
+void Log::set_start_time()
 {
+    time_t now = time(0);
+    char* dt = ctime(&now);
+    startTime = std::string(dt);
 }
 
-void Log::AddMsg(Message& msg)
+void Log::emplace_back(const Message msg)
 {
-    msgLog.emplace_back(msg);
+    logFile << msg;
+    messageLog.emplace_back(msg);
 }
 
-void Log::AddMsg(std::string& msg)
+void Log::add_msg(Message& msg)
 {
-    msgLog.emplace_back(msg);
+    messageLog.emplace_back(msg);
+    check_for_expand();
 }
 
-void Log::ClearLog()
+void Log::add_msg(std::string& msg)
 {
-    msgLog.clear();
+    messageLog.emplace_back(msg);
+    check_for_expand();
 }
 
-std::ofstream& operator<<(std::ofstream stream, const Message& other)
+void Log::check_for_expand()
 {
-    stream << other.message << '\n';
-    return stream;
+    if (messageLog.size() >= messageLog.capacity()) {
+        reserved += 100;
+        messageLog.reserve(reserved);
+    }
+}
+
+void Log::clear_log()
+{
+    messageLog.clear();
 }
