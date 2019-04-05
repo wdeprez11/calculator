@@ -31,7 +31,7 @@ std::string Message::get_message()
 std::ofstream& Message::operator<<(std::ofstream stream, const Message& other)
 {
     stream << other.message << '\n';
-    return stream;
+    //return stream;
 }
 
 Log::Log()
@@ -41,7 +41,7 @@ Log::Log()
     set_start_time();
     //logFile.open(("log" + startTime).c_str());
     emplace_back(Message(0, "Initializing Log..."));
-    emplace_back(Message(0, ("Log started at: " + startTime).c_str()));
+    emplace_back(Message(0, "Log started at: " + std::string(startTime.c_str())));
     emplace_back(Message(0, "Waiting for user input..."));
 }
 
@@ -74,7 +74,7 @@ void Log::set_start_time()
     startTime = std::string(dt);
 }
 
-void Log::emplace_back(const Message msg)
+void Log::emplace_back(const Message& msg)
 {
     logFile << msg;
     messageLog.emplace_back(msg);

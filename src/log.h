@@ -33,7 +33,7 @@ public:
     std::string get_line(std::string error);
     std::string get_log();
     std::string get_start_time();
-    void emplace_back(const Message message);
+    void emplace_back(const Message& message);
     void set_log(Log& newLog);
     void add_msg(std::string& msg);
     void add_msg(Message& msg);

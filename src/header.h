@@ -1,9 +1,11 @@
 #ifndef HEADER_H
 #define HEADER_H
+#include <bitset>
 
 class Precise {
 private:
     int size;
+    std::bitset<512> preciseBits;
 
 public:
     Precise();

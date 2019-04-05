@@ -1,12 +1,21 @@
+SRC=$(wildcard src/*.cpp)
+outdir = out
 
-output: main.o precise.o
-	g++ main.o precise.o -o calculator
+all: | $(outdir) output
+	@echo "Finished"
 
-main.o: main.cpp
-	g++ -c main.cpp
+$(outdir):
+	@echo "$(outdir) doesn't exist..."
+	mkdir -p $@
 
-message.o: precise.cpp header.h
-	g++ -c precise.cpp
+output: out out/main.o out/precise.o
+	g++ out/main.o out/precise.o -o ./calculator
+
+out/main.o: src/main.cpp
+	g++ -c src/main.cpp -o out/main.o
+
+out/precise.o: src/precise.cpp src/header.h
+	g++ -c src/precise.cpp -o out/precise.o
 
 clean:
-	rm *.o calculator
+	rm -rf out calculator

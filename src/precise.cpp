@@ -1,6 +1,9 @@
 #include "header.h"
 #include <bitset>
 
+/**
+ *
+ */
 Precise::Precise()
 {
 }

@@ -7,4 +7,5 @@ int main()
     Precise p2(3);
 
     std::cout << (p1 + p2).GetSize() << std::endl;
+    return 0;
 }
