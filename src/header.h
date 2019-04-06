@@ -10,7 +10,7 @@ private:
 public:
     Precise();
     Precise(int size);
-    int GetSize() const;
+    int get_size() const;
     Precise operator+(Precise& other) const;
     Precise operator-(Precise& other) const;
     Precise operator*(Precise& other) const;
