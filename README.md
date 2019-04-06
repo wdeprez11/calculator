@@ -6,7 +6,7 @@
 * Create a reader class and a standard for user input
 * Analyze other calculators' class structure for better effeciency with development
 * Learn about differences between make & cmake
-* +More!
+* and More!
 
 ## Misc.
 
