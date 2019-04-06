@@ -8,14 +8,17 @@ $(outdir):
 	@echo "$(outdir) doesn't exist..."
 	mkdir -p $@
 
-output: out out/main.o out/precise.o
+output: out main.o precise.o
 	g++ out/main.o out/precise.o -o ./calculator
 
-out/main.o: src/main.cpp
+main.o: src/main.cpp
 	g++ -c src/main.cpp -o out/main.o
 
-out/precise.o: src/precise.cpp src/header.h
+precise.o: src/precise.cpp src/header.h
 	g++ -c src/precise.cpp -o out/precise.o
 
+docs: $(SRC) doc/Doxyfile
+	doxygen doc/Doxyfile
+
 clean:
-	rm -rf out calculator
+	rm -rf out calculator doc/html
