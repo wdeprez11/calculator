@@ -1,18 +1,30 @@
+/**
+  * TODO: Get working dynamic bitset for different creation by user
+  */
 #include "header.h"
 #include <bitset>
 
 /**
- *
+ * @brief construcst default size object
+ * TODO: Actually figure out how to do dynamically sized bitsets (or at least be able to create them by different sizes)
  */
 Precise::Precise()
 {
 }
 
+/**
+ * @brief construcst default size object
+ * @param size The size of the bit array
+ * TODO: Actually figure out how to do dynamically sized bitsets (or at least be able to create them by different sizes)
+ */
 Precise::Precise(int size)
     : size(size)
 {
 }
 
+/**
+  * @return Returns the size(length) of the bit array.
+  */
 int Precise::get_size() const
 {
     return size;

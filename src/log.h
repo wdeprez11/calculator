@@ -12,7 +12,7 @@ public:
     Message(int type, std::string msg);
     std::string get_error_type();
     std::string get_message();
-    std::ofstream& operator<<(std::ofstream& stream, const Message& other);
+    std::ofstream& operator<<(std::ofstream& stream, const Message& other); //!< \bug Is there actually an error here?
     //std::ofstream& operator>>(std::ifstream& stream, Message& other);
 };
 
@@ -20,7 +20,7 @@ class Log {
 private:
     std::vector<Message> messageLog;
     std::string startTime;
-    std::ifstream logFile;
+    std::ofstream logFile; //!< \bug file stream as class attribute?
     int reserved;
     void check_for_expand();
     void set_start_time();
