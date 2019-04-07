@@ -1,0 +1,11 @@
+.TH CALCULATOR
+.SH CALCULATOR
+calculator - Minimal shell for doing math
+.SH SYNOPSIS
+calculator \- [ARGS]
+.SH DESCRIPTION
+.SH EXAMPLES
+.SH SEE ALSO
+.SH BUGS
+.SH AUTHOR
+.SH COPYRIGHT
