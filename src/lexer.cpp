@@ -1,3 +1,4 @@
+#include "lexer.h"
 /**
   * @brief Tokenizes input into
   */
@@ -17,3 +18,11 @@
             //
             / * * /
    */
+Lexer::Lexer(std::string input)
+    : untokened(input)
+{
+}
+
+void Lexer::tokenize()
+{
+}
