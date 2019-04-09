@@ -18,8 +18,7 @@
             //
             / * * /
    */
-Lexer::Lexer(std::string input)
-    : untokened(input)
+Lexer::Lexer(std::ifstream inputFile)
 {
 }
 

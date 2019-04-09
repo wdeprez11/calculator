@@ -18,11 +18,13 @@
 #include "header.h"
 #include <iostream>
 
-int main()
+int main(int argc, char** argv)
 {
-    Precise p1(2);
-    Precise p2(3);
-
-    std::cout << (p1 + p2).GetSize() << std::endl;
-    return 0;
+    for (int i = 0; i < argc; ++i)
+        std::cout << argv[i] << std::endl;
+    //std::string call;
+    //while (1) {
+    //std::cin >> call;
+    //}
+    //return 0;
 }
